@@ -1,0 +1,65 @@
+<section>
+    <h1>Ejercicio 8</h1>
+    <style>
+ body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #0f1626;
+            color: white;
+            padding: 20px;
+        }
+    .ex7 {
+        resize: both;
+        overflow: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        padding: 1em;
+        border: 1px solid blue;
+    }
+    
+    .ex7-1{
+        background-color:lightpink;
+    }
+    .ex7-2 {
+        background-color: lightblue;
+    }
+    .ex7-3 {
+        background-color: lightsalmon;
+    }
+    .ex7-4 {
+        background-color: lightyellow;
+    }
+    </style>
+    
+    <div class="ex7">
+        <div class="ex7-1" contenteditable="true">Tenemos un ancho de 100px. Si no cabemos todos en una fila, ocupamos otra <br> [114 x 202]</div>
+        <div class="ex7-2" contenteditable="true">Tenemos un ancho de 100px. Si no cabemos todos en una fila, ocupamos otra <br> [114 x 202]</div>
+        <div class="ex7-3" contenteditable="true">Tenemos un ancho de 100px. Si no cabemos todos en una fila, ocupamos otra <br> [114 x 202]</div>
+        <div class="ex7-4" contenteditable="true">Tenemos un ancho de 100px. Si no cabemos todos en una fila, ocupamos otra <br> [114 x 202]</div>
+    </div>
+
+    <div style="height: 500px;">
+
+    </div>
+
+    <script>
+        let observer = new MutationObserver(function(mutations) {
+            mutations.forEach(m => {
+                m.target.childNodes.forEach(ch => {
+                    if(ch.nodeName != "#text"){
+                        ch.innerHTML = ch.innerHTML.replace(/\[.*\]/, "[" + ch.clientWidth + " x " + ch.clientHeight + "]");
+                    }
+                });
+            });
+        });
+
+        document.querySelectorAll("div").forEach(d => {
+            observer.observe(d, {attributes: true});
+        });
+        
+        document.querySelectorAll("div[contenteditable=true]").forEach(d => {
+            d.innerHTML = d.innerHTML.replace(/\[.*\]/, "[" + d.clientWidth + " x " + d.clientHeight + "]");
+        })
+    </script>
+
+</section>
